@@ -1,54 +1,49 @@
 <template>
-    <main class="px-8 py-6 bg-gray-100">
-            <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
-                <div class="main-left col-span-2">
-                    <div class="p-12 bg-white border border-gray-200 rounded-lg">
-                        <p class="font-bold">
-                            Already have an account? <RouterLink to="login" class="underline">Click here</RouterLink> to log in!
-                        </p>
-                    </div>
-                </div>
+  <main class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div class="w-full max-w-md bg-white border border-gray-200 rounded-lg p-8 shadow-md">
+      <form class="space-y-6" v-on:submit.prevent="submitForm()">
+        <div>
+          <label>Name</label><br>
+          <input type="text" v-model="form.name" placeholder="Your full name" class="w-full mt-2 py-3 px-4 border border-gray-200 rounded-lg">
+        </div>
 
-                <div class="main-center col-span-2 space-y-4">
-                    <div class="p-12 bg-white border border-gray-200 rounded-lg">
-                        <form class="space-y-6" v-on:submit.prevent="submitForm()">
-                            <div>
-                                <label>Name</label><br>
-                                <input type="text" v-model="form.name" placeholder="Your full name" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
-                            </div>
+        <div>
+          <label>E-mail</label><br>
+          <input type="email" v-model="form.email" placeholder="Your e-mail address" class="w-full mt-2 py-3 px-4 border border-gray-200 rounded-lg">
+        </div>
 
-                            <div>
-                                <label>E-mail</label><br>
-                                <input type="email" v-model="form.email" placeholder="Your e-mail address" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
-                            </div>
+        <div>
+          <label>Password</label><br>
+          <input type="password" v-model="form.password1" placeholder="Your password" class="w-full mt-2 py-3 px-4 border border-gray-200 rounded-lg">
+        </div>
 
-                            <div>
-                                <label>Password</label><br>
-                                <input type="password" v-model="form.password1" placeholder="Your password" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
-                            </div>
+        <div>
+          <label>Repeat password</label><br>
+          <input type="password" v-model="form.password2" placeholder="Repeat your password" class="w-full mt-2 py-3 px-4 border border-gray-200 rounded-lg">
+        </div>
 
-                            <div>
-                                <label>Repeat password</label><br>
-                                <input type="password" v-model="form.password2" placeholder="Repeat your password" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
-                            </div>
+        <div>
+          <button class="w-full py-3 px-4 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">Sign Up</button>
+        </div>
 
-                            <template v-if="errors.length > 0">
-                                <div class="bg-red-300 text-white rounded-lg p-6">
-                                    <p v-for="error in errors" v-bind:key="error">
-                                        {{ error }}
-                                    </p>
-                                </div>
-                            </template>
+        <div class="text-center">
+          <p class="font-medium">
+            <RouterLink to="login" class="underline text-purple-600">Already have an account?</RouterLink>
+          </p>
+        </div>
 
-                            <div>
-                                <button class="py-4 px-6 bg-purple-600 text-white rounded-lg">Sign Up</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </main>
+        <template v-if="errors.length > 0">
+          <div class="bg-red-300 text-white rounded-lg p-4">
+            <p v-for="error in errors" :key="error">
+              {{ error }}
+            </p>
+          </div>
+        </template>
+      </form>
+    </div>
+  </main>
 </template>
+
 
 <script>
 import axios from 'axios'

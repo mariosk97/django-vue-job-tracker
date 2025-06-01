@@ -18,6 +18,6 @@ tokens
 
 
 /me api apo social media gia login
-signup frontend to login na einai apo kato apo to form k oxi dipla
 job app django meta
-social media giati exei to kodika sto app.vue des video
+redirect sto login meta to signup
+otan mpainei sto :5173 na dixni to signup
