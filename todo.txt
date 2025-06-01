@@ -1,0 +1,23 @@
+10:16
+
+Feature				Type			Notes
+Register/Login/Logout		Auth			Use Django built-in or Token/JWT
+Add job				Create			Authenticated user only
+View jobs			Read			User sees only their own jobs
+Edit job			Update			Inline form or edit page
+Delete job			Delete			Simple button
+REST API			Django REST		GET, POST, PUT, DELETE endpoints
+Optional UI			Bootstrap or React	Clean, mobile-friendly design
+
+components
+toasts
+stores
+api.py
+django apps
+tokens
+
+
+/me api apo social media gia login
+signup frontend to login na einai apo kato apo to form k oxi dipla
+job app django meta
+social media giati exei to kodika sto app.vue des video
