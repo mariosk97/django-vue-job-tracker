@@ -17,7 +17,8 @@ django apps
 tokens
 
 
-/me api apo social media gia login
+
 job app django meta
 redirect sto login meta to signup
 otan mpainei sto :5173 na dixni to signup
+logout apo profile view

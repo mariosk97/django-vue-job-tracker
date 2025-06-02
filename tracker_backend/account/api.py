@@ -3,6 +3,14 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from .forms import SignUpForm
 from .models import User
 
+@api_view(['GET'])
+def me(request):
+    return JsonResponse({
+        'id': request.user.id,
+        'email': request.user.email,
+        'name': request.user.name,
+    })
+
 @api_view(['POST'])
 @authentication_classes([])
 @permission_classes([])
