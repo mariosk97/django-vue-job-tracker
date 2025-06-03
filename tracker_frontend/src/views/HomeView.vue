@@ -1,7 +1,6 @@
 <template>
   <main class="min-h-screen bg-gray-100 py-10 px-4">
     <div class="max-w-5xl mx-auto space-y-8">
-
       <!-- Header -->
       <div class="flex items-center justify-between">
         <h1 class="text-2xl font-bold text-gray-800">Welcome back, {{ userName }}!</h1>
@@ -81,7 +80,6 @@
           </tbody>
         </table>
       </div>
-
     </div>
   </main>
 </template>
