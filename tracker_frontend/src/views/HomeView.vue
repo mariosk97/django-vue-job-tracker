@@ -4,7 +4,9 @@
       <!-- Header -->
       <div class="flex items-center justify-between">
         <h1 class="text-2xl font-bold text-gray-800">Welcome back, {{ userName }}!</h1>
-        <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+        <button 
+          class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+          @click="logout">
           Log out
         </button>
       </div>
@@ -84,7 +86,51 @@
   </main>
 </template>
 
-<script setup>
+<script>
+
+import axios from 'axios'
+import { useUserStore } from '@/stores/user'
+
+export default {
+  name: 'HomeView',
+
+    setup() {
+      const userStore = useUserStore()
+      
+      return {
+          userStore,
+          
+      }
+  }, 
+
+  data() {
+    return {
+      jobs: [],
+      user: {},
+    }
+  },
+
+  methods: {
+    logout() {
+        console.log("logout")
+        this.userStore.removeToken()
+        this.$router.push('/login')
+    },
+
+    createJob() {
+      console.log('createJob')
+      //axios   
+        //.get(`/api/chat/${this.$route.params.id}/get-or-create/`)
+        //.then(response => {
+         // console.log('data', response.data)
+          //this.$router.push('/chat')
+        //})   
+        //.catch(error => {
+        //  console.log('error', error)
+        //})   
+    },
+  }  
+} 
 
 </script>
 

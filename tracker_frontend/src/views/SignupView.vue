@@ -50,6 +50,8 @@ import axios from 'axios'
 import { useToastStore } from '@/stores/toast'
 
 export default {
+  name: 'SignupView',
+
   data() {
     return {
       toastStore: null,
