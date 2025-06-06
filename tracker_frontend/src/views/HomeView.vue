@@ -1,4 +1,9 @@
 <template>
+  <JobModal
+    :isModalOpen="isModalOpen"
+    @close="isModalOpen = false"
+    @job-created="loadJobs"
+  />
   <main class="min-h-screen bg-gray-100 py-10 px-4">
     <div class="max-w-5xl mx-auto space-y-8">
       <!-- Header -->
@@ -13,7 +18,7 @@
 
       <!-- Actions -->
       <div class="flex flex-wrap items-center justify-between gap-4">
-        <button class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+        <button @click="isModalOpen = true" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
           + Add New Job
         </button>
 
@@ -90,9 +95,12 @@
 
 import axios from 'axios'
 import { useUserStore } from '@/stores/user'
+import JobModal from '@/components/JobModal.vue'
 
 export default {
   name: 'HomeView',
+
+  components: { JobModal },
 
     setup() {
       const userStore = useUserStore()
@@ -107,6 +115,7 @@ export default {
     return {
       jobs: [],
       user: {},
+      isModalOpen: false
     }
   },
 
@@ -116,19 +125,9 @@ export default {
         this.userStore.removeToken()
         this.$router.push('/login')
     },
-
-    createJob() {
-      console.log('createJob')
-      //axios   
-        //.get(`/api/chat/${this.$route.params.id}/get-or-create/`)
-        //.then(response => {
-         // console.log('data', response.data)
-          //this.$router.push('/chat')
-        //})   
-        //.catch(error => {
-        //  console.log('error', error)
-        //})   
-    },
+    loadJobs() {
+      // reload job list from server
+    }
   }  
 } 
 

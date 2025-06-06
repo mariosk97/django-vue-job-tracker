@@ -23,4 +23,7 @@ logout apo profile view
 homeview mono an einai loggedin
 mounted get jobs (san ti getfeed)
 ftiakse to component me to modal dialog
+validate form sto jobmodal
+loadjobs sto homeview
+username warning sto console
 

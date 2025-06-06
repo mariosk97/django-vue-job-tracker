@@ -16,7 +16,7 @@
             </form>
 
             <div class="mt-6 flex justify-end gap-2">
-                <button @click="isModalOpen = false" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
+                <button @click="closeModal" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
                 <button @click="submitForm" class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">
                     Add Job
                 </button>
@@ -26,6 +26,8 @@
 </template>    
 
 <script>
+import axios from 'axios'
+
 export default {
   props: {
     isModalOpen: Boolean
@@ -44,14 +46,21 @@ export default {
 
   methods: {
     submitForm() {
-      axios.post('/api/jobs/', this.form)
+
+      //validate form
+
+      axios.post('/api/jobs/create/', this.form)
         .then(response => {
           this.$emit('job-created')       // tell parent to reload jobs
           this.$emit('close')             // tell parent to close modal
           this.form = { company: '', position: '', status: 'applied', date_applied: '' }
         })
         .catch(error => console.log(error))
-    }
+    },
+
+    closeModal() {
+    this.$emit('close') // Notify parent
+  }
   }
 }  
 
