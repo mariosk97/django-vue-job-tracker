@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from .models import User
+from .models import Job
 from .forms import JobForm
 from .serializers import CreateJobSerializer
 
@@ -19,4 +19,10 @@ def create_job(request):
     
 @api_view(['GET'])
 def get_jobs(request):  
-    pass  
+    user = request.user  
+    jobs = Job.objects.filter(user = user)
+
+    serializer = CreateJobSerializer(jobs, many=True)   
+    print(jobs) 
+
+    return JsonResponse(serializer.data, safe=False)

@@ -130,9 +130,8 @@ export default {
       axios
         axios.get('/api/jobs/')
         .then(response => {
-          console.log('data', response.data.jobs)
-          this.jobs = response.data.jobs
-          //this.user = response.data.user
+          console.log('data', response.data)
+          this.jobs = response.data
         })    
         .catch(error => {
           console.log('error', error)

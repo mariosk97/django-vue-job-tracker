@@ -17,7 +17,6 @@ django apps
 tokens
 
 
-getjobs sto homeview san to getFeed
 component san to FeedItem (pou dixni ta post tou user) gia ta Jobs
 mounted get jobs (san ti getfeed)
 redirect sto login meta to signup
