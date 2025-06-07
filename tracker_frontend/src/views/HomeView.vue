@@ -2,7 +2,7 @@
   <JobModal
     :isModalOpen="isModalOpen"
     @close="isModalOpen = false"
-    @job-created="loadJobs"
+    @job-created="getJobs"
   />
   <main class="min-h-screen bg-gray-100 py-10 px-4">
     <div class="max-w-5xl mx-auto space-y-8">
@@ -125,8 +125,18 @@ export default {
         this.userStore.removeToken()
         this.$router.push('/login')
     },
-    loadJobs() {
-      // reload job list from server
+    
+    getJobs() {
+      axios
+        axios.get('/api/jobs/')
+        .then(response => {
+          console.log('data', response.data.jobs)
+          this.jobs = response.data.jobs
+          //this.user = response.data.user
+        })    
+        .catch(error => {
+          console.log('error', error)
+        })
     }
   }  
 } 

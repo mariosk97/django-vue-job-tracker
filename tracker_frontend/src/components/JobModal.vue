@@ -15,10 +15,18 @@
                 <input type="date" v-model="form.date_applied" class="w-full border px-4 py-2 rounded" />
             </form>
 
+            <template v-if="errors.length > 0">
+              <div class="bg-red-300 text-white rounded-lg p-6">
+                <p v-for="error in errors" v-bind:key="error">
+                  {{ error }}
+                </p>
+              </div>
+            </template>
+
             <div class="mt-6 flex justify-end gap-2">
                 <button @click="closeModal" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
                 <button @click="submitForm" class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">
-                    Add Job
+                  Add Job
                 </button>
             </div>    
         </div>
@@ -40,22 +48,39 @@ export default {
         position: '',
         status: 'applied',
         date_applied: ''
-      }
+      },
+
+      errors: [],
     }
   },
 
   methods: {
     submitForm() {
 
-      //validate form
+      this.errors = [] 
+        
+        if (this.form.company === ''){
+          this.errors.push('company is missing')
+        }
 
-      axios.post('/api/jobs/create/', this.form)
-        .then(response => {
-          this.$emit('job-created')       // tell parent to reload jobs
-          this.$emit('close')             // tell parent to close modal
-          this.form = { company: '', position: '', status: 'applied', date_applied: '' }
-        })
+        if (this.form.position === ''){
+          this.errors.push('position is missing')
+        }
+
+        if (this.form.date_applied === ''){
+          this.errors.push('date applied is missing')
+        }
+
+        if (this.errors.length ===0) {
+          axios
+          .post('/api/jobs/create/', this.form)
+          .then(response => {
+            this.$emit('job-created')       // tell parent to reload jobs
+            this.$emit('close')             // tell parent to close modal
+            this.form = { company: '', position: '', status: 'applied', date_applied: '' }
+          })
         .catch(error => console.log(error))
+        }  
     },
 
     closeModal() {
