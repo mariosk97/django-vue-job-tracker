@@ -54,7 +54,13 @@
           </thead>
           <tbody>
 
-            <JobItem v-for="job in jobs" :key="job.id" :job="job" />
+            <JobItem
+              v-for="job in jobs"
+              :key="job.id"
+              :job="job"
+              @delete-job="deleteJob"
+              @edit-job="editJob"
+            />
 
             <tr v-if="jobs.length === 0">
               <td colspan="5" class="text-center py-6 text-gray-500">
@@ -122,7 +128,25 @@ export default {
         .catch(error => {
           console.log('error', error)
         })
+    },
+    
+    deleteJob(id) {
+      axios
+        .delete(`/api/jobs/delete/${id}/`)
+        .then(response => {
+          console.log("job deleted")
+          this.jobs = this.jobs.filter(job => job.id !== id)
+          //this.toastStore.showToast(3000, 'Job deleted successfully', 'bg-emerald-500')
+        })    
+        .catch(error => {
+          console.log('error', error)
+        })
+    },
+
+    editJob(job) {
+      console.log('Edit job:', job)
     }
+
   }  
 } 
 

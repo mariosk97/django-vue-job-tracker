@@ -26,3 +26,7 @@ def get_jobs(request):
     print(jobs) 
 
     return JsonResponse(serializer.data, safe=False)
+
+@api_view(['DELETE'])
+def delete_job(request, id):
+    pass

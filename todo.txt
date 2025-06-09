@@ -17,8 +17,8 @@ django apps
 tokens
 
 
-component san to FeedItem (pou dixni ta post tou user) gia ta Jobs
-mounted get jobs (san ti getfeed)
+xroma sto status
+id sta edit kai delete
 redirect sto login meta to signup
 otan mpainei sto :5173 na dixni to signup
 homeview mono an einai loggedin

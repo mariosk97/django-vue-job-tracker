@@ -3,8 +3,16 @@
         <td class="px-6 py-4">{{ job.company }}</td>
         <td class="px-6 py-4">{{ job.position }}</td>
         <td class="px-6 py-4">
-        <span class="inline-block px-3 py-1 text-xs font-semibold bg-yellow-200 text-yellow-800 rounded-full">
-            {{ job.status }}
+        <span 
+            class="inline-block px-3 py-1 text-xs font-semibold rounded-full"
+            :class="{
+                'bg-yellow-200 text-yellow-800': job.status === 'applied',
+                'bg-blue-200 text-blue-800': job.status === 'interview',
+                'bg-green-200 text-green-800': job.status === 'offer',
+                'bg-red-200 text-red-800': job.status === 'rejected',
+            }"
+            >
+            {{ job.status.charAt(0).toUpperCase() + job.status.slice(1) }}
         </span>
         </td>
         <td class="px-6 py-4">{{ job.date_applied }}</td>
@@ -34,6 +42,16 @@
 export default {
   props: {
     job: Object
+  },
+
+  methods: {
+  handleDelete() {
+    this.$emit('delete-job', this.job.id)
+  },
+  
+  handleEdit() {
+    this.$emit('edit-job', this.job)
   }
+}
 }
 </script>
