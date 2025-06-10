@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from .models import Job
 from .forms import JobForm
-from .serializers import CreateJobSerializer
+from .serializers import CreateJobSerializer, JobSerializer
 
 @api_view(['POST'])
 def create_job(request):
@@ -22,11 +22,14 @@ def get_jobs(request):
     user = request.user  
     jobs = Job.objects.filter(user = user)
 
-    serializer = CreateJobSerializer(jobs, many=True)   
+    serializer = JobSerializer(jobs, many=True)   
     print(jobs) 
 
     return JsonResponse(serializer.data, safe=False)
 
 @api_view(['DELETE'])
 def delete_job(request, id):
-    pass
+    job = Job.objects.get(id = id, user = request.user)
+    job.delete()
+
+    return JsonResponse({'message': 'Job deleted'})

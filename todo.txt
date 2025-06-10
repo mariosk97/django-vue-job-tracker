@@ -17,8 +17,8 @@ django apps
 tokens
 
 
-xroma sto status
-id sta edit kai delete
+prompt prin gini to delete
+edit
 redirect sto login meta to signup
 otan mpainei sto :5173 na dixni to signup
 homeview mono an einai loggedin
