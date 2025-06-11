@@ -38,7 +38,8 @@ import axios from 'axios'
 
 export default {
   props: {
-    isModalOpen: Boolean
+    isModalOpen: Boolean,
+    jobToEdit: Object,
   },
 
   data() {
@@ -49,45 +50,65 @@ export default {
         status: 'applied',
         date_applied: ''
       },
-
       errors: [],
+    }
+  },
+
+  watch: {
+    jobToEdit: {
+      immediate: true,
+      handler(newJob) {
+        if (newJob) {
+          this.form = {
+            company: newJob.company,
+            position: newJob.position,
+            status: newJob.status,
+            date_applied: newJob.date_applied
+          }
+        } else {
+          this.form = {
+            company: '',
+            position: '',
+            status: 'applied',
+            date_applied: ''
+          }
+        }
+      }
     }
   },
 
   methods: {
     submitForm() {
+      this.errors = []
 
-      this.errors = [] 
-        
-        if (this.form.company === ''){
-          this.errors.push('company is missing')
+      if (this.form.company === '') this.errors.push('company is missing')
+      if (this.form.position === '') this.errors.push('position is missing')
+      if (this.form.date_applied === '') this.errors.push('date applied is missing')
+
+      if (this.errors.length === 0) {
+        if (this.jobToEdit) {
+          axios.put(`/api/jobs/update/${this.jobToEdit.id}/`, this.form)
+            .then(response => {
+              this.$emit('job-updated', response.data)
+              this.$emit('close')
+            })
+            .catch(error => console.log(error))
+        } else {
+          axios.post('/api/jobs/create/', this.form)
+            .then(response => {
+              this.$emit('job-created', response.data)
+              this.$emit('close')
+            })
+            .catch(error => console.log(error))
         }
-
-        if (this.form.position === ''){
-          this.errors.push('position is missing')
-        }
-
-        if (this.form.date_applied === ''){
-          this.errors.push('date applied is missing')
-        }
-
-        if (this.errors.length ===0) {
-          axios
-          .post('/api/jobs/create/', this.form)
-          .then(response => {
-            this.$emit('job-created')       // tell parent to reload jobs
-            this.$emit('close')             // tell parent to close modal
-            this.form = { company: '', position: '', status: 'applied', date_applied: '' }
-          })
-        .catch(error => console.log(error))
-        }  
+      }
     },
 
     closeModal() {
-    this.$emit('close') // Notify parent
+      this.$emit('close')
+    }
   }
-  }
-}  
+}
+</script>
 
-</script>  
    

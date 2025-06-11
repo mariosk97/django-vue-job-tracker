@@ -1,8 +1,10 @@
 <template>
   <JobModal
     :isModalOpen="isModalOpen"
-    @close="isModalOpen = false"
+    :jobToEdit="jobToEdit"
+    @close="isModalOpen = false; jobToEdit = null"
     @job-created="getJobs"
+    @job-updated="updateJob"
   />
   <main class="min-h-screen bg-gray-100 py-10 px-4">
     <div class="max-w-5xl mx-auto space-y-8">
@@ -103,7 +105,8 @@ export default {
     return {
       jobs: [],
       user: {},
-      isModalOpen: false
+      isModalOpen: false,
+      jobToEdit: null,
     }
   },
 
@@ -145,7 +148,15 @@ export default {
 
     editJob(job) {
       console.log('Edit job:', job)
+      this.jobToEdit = job
+      this.isModalOpen = true
+    },
+
+    updateJob(updatedJob) {
+      const index = this.jobs.findIndex(job => job.id === updatedJob.id)
+      if (index !== -1) this.jobs.splice(index, 1, updatedJob)
     }
+
 
   }  
 } 
