@@ -17,10 +17,8 @@ django apps
 tokens
 
 
-prompt prin gini to delete
-edit
-redirect sto login meta to signup
-otan mpainei sto :5173 na dixni to signup
-homeview mono an einai loggedin
+
+
+
 username warning sto console
 

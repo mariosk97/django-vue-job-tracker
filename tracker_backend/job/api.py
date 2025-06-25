@@ -33,3 +33,15 @@ def delete_job(request, id):
     job.delete()
 
     return JsonResponse({'message': 'Job deleted'})
+
+@api_view(['PUT'])
+def update_job(request, id):
+    job = Job.objects.get(id = id, user = request.user)
+
+    job.company = request.data.get('company')
+    job.position = request.data.get('position')
+    job.status = request.data.get('status')
+    job.date_applied = request.data.get('date_applied')
+    job.save()
+
+    return JsonResponse({'message': 'Job updated'})
