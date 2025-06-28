@@ -1,14 +1,3 @@
-10:16
-
-Feature				Type			Notes
-Register/Login/Logout		Auth			Use Django built-in or Token/JWT
-Add job				Create			Authenticated user only
-View jobs			Read			User sees only their own jobs
-Edit job			Update			Inline form or edit page
-Delete job			Delete			Simple button
-REST API			Django REST		GET, POST, PUT, DELETE endpoints
-Optional UI			Bootstrap or React	Clean, mobile-friendly design
-
 components
 toasts
 stores
@@ -20,5 +9,5 @@ tokens
 
 
 
-username warning sto console
+username warning console
 
