@@ -28,7 +28,7 @@
             <div class="mt-6 flex justify-end gap-2">
                 <button @click="closeModal" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
                 <button @click="submitForm" class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">
-                  Add Job
+                  {{ jobToEdit ? 'Update Job' : 'Add Job' }}
                 </button>
             </div>    
         </div>

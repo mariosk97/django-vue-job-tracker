@@ -44,4 +44,5 @@ def update_job(request, id):
     job.date_applied = request.data.get('date_applied')
     job.save()
 
-    return JsonResponse({'message': 'Job updated'})
+    serializer = JobSerializer(job)  
+    return JsonResponse(serializer.data, safe=False)

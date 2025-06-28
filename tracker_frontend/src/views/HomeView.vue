@@ -1,3 +1,4 @@
+
 <template>
   <JobModal
     :isModalOpen="isModalOpen"
@@ -166,4 +167,3 @@ export default {
 } 
 
 </script>
-
