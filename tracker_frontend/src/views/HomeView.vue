@@ -1,6 +1,7 @@
 
 <template>
   <JobModal
+    ref="jobModal"
     :isModalOpen="isModalOpen"
     :jobToEdit="jobToEdit"
     @close="isModalOpen = false; jobToEdit = null"
@@ -21,7 +22,7 @@
 
       <!-- Actions -->
       <div class="flex flex-wrap items-center justify-between gap-4">
-        <button @click="isModalOpen = true" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+        <button @click="openCreateModal" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
           + Add New Job
         </button>
 
@@ -160,9 +161,17 @@ export default {
     updateJob(updatedJob) {
       const index = this.jobs.findIndex(job => job.id === updatedJob.id)
       if (index !== -1) this.jobs.splice(index, 1, updatedJob)
+    },
+
+    openCreateModal() {
+      this.jobToEdit = null
+      this.isModalOpen = true
+
+      // Wait a tick, then force reset the form inside the modal
+      this.$nextTick(() => {
+      this.$refs.jobModal?.resetForm()
+      })
     }
-
-
   }  
 } 
 

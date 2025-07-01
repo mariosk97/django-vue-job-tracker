@@ -108,7 +108,17 @@ export default {
 
     closeModal() {
       this.$emit('close')
-    }
+    },
+
+    resetForm() {
+      this.form = {
+        company: '',
+        position: '',
+        status: 'applied',
+        date_applied: ''
+      }
+      this.errors = []
+    }  
   }
 }
 </script>
